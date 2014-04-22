@@ -51,7 +51,7 @@ class homebrew(
       source  => 'puppet:///modules/homebrew/boxen-latest.rb' ;
     "${cmddir}/boxen-install.rb":
       source  => 'puppet:///modules/homebrew/boxen-install.rb' ;
-    "${installdir}/Library/Homebrew/cmd/boxen-upgrade.rb":
+    "${cmddir}/boxen-upgrade.rb":
       source  => 'puppet:///modules/homebrew/boxen-upgrade.rb' ;
   }
 
