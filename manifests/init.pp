@@ -20,7 +20,14 @@ class homebrew(
 
   repository { $installdir:
     source => 'Homebrew/homebrew',
-    user   => $::boxen_user
+    user   => $::boxen_user,
+    require => Exec['chmod_installdir']
+  }
+
+  exec { 'chmod_installdir':
+    command => "mkdir -p /usr/local; /bin/chmod g+rwx $installdir; /usr/bin/chgrp admin $installdir",
+    unless => "test `stat -f %g $installdir` -eq `grep ^admin: /etc/group | cut -d: -f3`",
+    user => root
   }
 
   File {
