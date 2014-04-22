@@ -24,8 +24,14 @@ class homebrew(
     require => Exec['chmod_installdir']
   }
 
+  notice("XXXXX Cache dir: ${cachedir}")
+  notice("XXXXX Install dir: ${installdir}")
+  notice("XXXXX libdir: ${libdir}")
+  notice("XXXXX Cmd dir: ${cmddir}")
+  notice("XXXXX brewsdir: ${brewsdir}")
+
   exec { 'chmod_installdir':
-    command => "mkdir -p /usr/local; /bin/chmod g+rwx $installdir; /usr/bin/chgrp admin $installdir",
+    command => "mkdir -p ${installdir}; /bin/chmod g+rwx $installdir; /usr/bin/chgrp admin $installdir",
     unless => "test `stat -f %g $installdir` -eq `grep ^admin: /etc/group | cut -d: -f3`",
     user => root
   }
@@ -51,7 +57,7 @@ class homebrew(
       source  => 'puppet:///modules/homebrew/boxen-latest.rb' ;
     "${cmddir}/boxen-install.rb":
       source  => 'puppet:///modules/homebrew/boxen-install.rb' ;
-    "${cmddir}/boxen-upgrade.rb":
+    "${installdir}/Library/Homebrew/cmd/boxen-upgrade.rb":
       source  => 'puppet:///modules/homebrew/boxen-upgrade.rb' ;
   }
 
