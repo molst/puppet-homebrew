@@ -24,11 +24,12 @@ class homebrew(
     require => Exec['chmod_installdir']
   }
 
-  notice("XXXXX Cache dir: ${cachedir}")
-  notice("XXXXX Install dir: ${installdir}")
-  notice("XXXXX libdir: ${libdir}")
-  notice("XXXXX Cmd dir: ${cmddir}")
-  notice("XXXXX brewsdir: ${brewsdir}")
+#  notice("XXXXX Cache dir: ${cachedir}")
+#  notice("XXXXX Install dir: ${installdir}")
+#  notice("XXXXX libdir: ${libdir}")
+#  notice("XXXXX Cmd dir: ${cmddir}")
+#  notice("XXXXX brewsdir: ${brewsdir}")
+#  notice("XXXXX envdir ${boxen::config::envdir}")
 
   exec { 'chmod_installdir':
     command => "mkdir -p ${installdir}; /bin/chmod g+rwx $installdir; /usr/bin/chgrp admin $installdir",
